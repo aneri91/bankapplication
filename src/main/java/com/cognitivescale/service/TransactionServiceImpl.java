@@ -88,14 +88,14 @@ public class TransactionServiceImpl implements TransactionService {
 							transactionMaster = buildTransactions(amount, accountNumber, "debit");
 						} else {
 							transactionMaster.setAmount(transactionMaster.getAmount().add(amount));
-							transactionMaster.setDate(new Date());
+							transactionMaster.setUpdateDate(new Date());
 						}
 						if (ObjectUtils.isEmpty(beneficiaryTransactionMaster)) {
 							beneficiaryTransactionMaster = buildTransactions(amount, beneficiaryAccountNumber,
 									"credit");
 						} else {
 							beneficiaryTransactionMaster.setAmount(beneficiaryTransactionMaster.getAmount().add(amount));
-							beneficiaryTransactionMaster.setDate(new Date());
+							beneficiaryTransactionMaster.setUpdateDate(new Date());
 						}
 						account.setBalance(account.getBalance().subtract(amount));
 						beneficiary.setBalance(beneficiary.getBalance().add(amount));
@@ -151,7 +151,7 @@ public class TransactionServiceImpl implements TransactionService {
 	private Transaction buildTransactions(BigDecimal amount, Integer accountNumber, String type) {
 		Transaction transaction = new Transaction();
 		transaction.setAmount(amount);
-		transaction.setDate(new Date());
+		transaction.setCreatedDate(new Date());
 		transaction.setType(type);
 		transaction.setAccountNumber(accountNumber);
 		return transaction;

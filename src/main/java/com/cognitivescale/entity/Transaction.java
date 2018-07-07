@@ -13,7 +13,8 @@ public class Transaction {
 	@Id
 	private String id;
 	private BigDecimal amount;
-	private Date date;
+	private Date createdDate;
+	private Date updateDate;
 	private String type;
 	private Integer accountNumber;
 	private List<Account> accounts;
@@ -34,12 +35,20 @@ public class Transaction {
 		this.amount = amount;
 	}
 
-	public Date getDate() {
-		return date;
+	public Date getCreatedDate() {
+		return createdDate;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public Date getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
 	}
 
 	public String getType() {
