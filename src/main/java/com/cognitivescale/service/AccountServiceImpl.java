@@ -131,15 +131,22 @@ public class AccountServiceImpl implements AccountService {
 			}
 			Account account = accountDao.findByAccountNumber(accountNumber);
 			if (!ObjectUtils.isEmpty(account)) {
-				Date givenDate = new SimpleDateFormat("dd MM yyyy").parse(date);
+				String[] splitedDate = date.split("-");
+				Date givenDate = new SimpleDateFormat("dd MM yyyy")
+						.parse(splitedDate[2] + " " + splitedDate[1] + " " + splitedDate[0]);
 				String currentDate = new SimpleDateFormat("dd MM yyyy").format(new Date());
 				Date currDate = new SimpleDateFormat("dd MM yyyy").parse(currentDate);
-				long diff = currDate.getTime() - givenDate.getTime();
-				float days = (diff / (1000 * 60 * 60 * 24));
-				float calculatedInterest = (days * 4) / 36500;
-				response.setData(account.getBalance().add(BigDecimal.valueOf(calculatedInterest)));
-				response.setStatus(Constants.STATUS_SUCCESS);
-				response.setMessage("Calculated Balance is found.");
+				if (givenDate.compareTo(currDate) >= 0) {
+					long diff = givenDate.getTime() - currDate.getTime();
+					float days = (diff / (1000 * 60 * 60 * 24));
+					float calculatedInterest = (days * 4) / 36500;
+					response.setData(account.getBalance().add(BigDecimal.valueOf(calculatedInterest)));
+					response.setStatus(Constants.STATUS_SUCCESS);
+					response.setMessage("Balance is calculated as per interest of 4%.");
+				} else {
+					response.setMessage("Given date should be greater than current date.");
+				}
+
 			} else {
 				response.setMessage(Constants.ACCOUNT_NOT_REGISTERED);
 			}
