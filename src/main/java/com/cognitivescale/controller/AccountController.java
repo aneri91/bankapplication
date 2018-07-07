@@ -15,8 +15,11 @@ import com.cognitivescale.model.AccountModel;
 import com.cognitivescale.service.AccountService;
 import com.cognitivescale.util.ResponseUtils;
 
+import io.swagger.annotations.Api;
+
 @RestController
 @RequestMapping("/account")
+@Api(value = "account")
 public class AccountController {
 	private static final Logger LOG = LoggerFactory.getLogger(AccountController.class);
 

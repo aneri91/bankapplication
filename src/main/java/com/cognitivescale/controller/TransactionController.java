@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cognitivescale.service.TransactionService;
 import com.cognitivescale.util.ResponseUtils;
 
+import io.swagger.annotations.Api;
+
 @RestController
 @RequestMapping("/transaction")
+@Api(value="transaction")
 public class TransactionController {
 	private static final Logger LOG = LoggerFactory.getLogger(TransactionController.class);
 
