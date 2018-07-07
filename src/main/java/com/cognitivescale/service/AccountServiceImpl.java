@@ -23,7 +23,7 @@ import com.cognitivescale.util.ResponseUtils;
  */
 @Service
 public class AccountServiceImpl implements AccountService {
-	
+
 	/** The Constant LOG. */
 	private static final Logger LOG = LoggerFactory.getLogger(AccountServiceImpl.class);
 
@@ -31,8 +31,11 @@ public class AccountServiceImpl implements AccountService {
 	@Autowired
 	private AccountDao accountDao;
 
-	/* (non-Javadoc)
-	 * @see com.cognitivescale.service.AccountService#save(com.cognitivescale.model.AccountModel)
+	/**
+	 * Saves the account details.
+	 *
+	 * @param accountModel the account model
+	 * @return the accountId
 	 */
 	@Override
 	public ResponseUtils save(AccountModel accountModel) {
@@ -63,8 +66,11 @@ public class AccountServiceImpl implements AccountService {
 		return response;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.cognitivescale.service.AccountService#findByUsername(java.lang.String)
+	/**
+	 * Finds by username.
+	 *
+	 * @param username
+	 * @return the account details
 	 */
 	@Override
 	public ResponseUtils findByUsername(String username) {
@@ -84,8 +90,12 @@ public class AccountServiceImpl implements AccountService {
 		return response;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.cognitivescale.service.AccountService#validateUser(java.lang.String, java.lang.String)
+	/**
+	 * Validates user.
+	 *
+	 * @param username the username
+	 * @param password the password
+	 * @return the account details
 	 */
 	@Override
 	public ResponseUtils validateUser(String username, String password) {
@@ -111,8 +121,11 @@ public class AccountServiceImpl implements AccountService {
 		return response;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.cognitivescale.service.AccountService#getBalanceInfoByAccountNumber(java.lang.Integer)
+	/**
+	 * Get balance info by account number.
+	 *
+	 * @param accountNumber
+	 * @return the account balance
 	 */
 	@Override
 	public ResponseUtils getBalanceInfoByAccountNumber(Integer accountNumber) {
@@ -138,8 +151,12 @@ public class AccountServiceImpl implements AccountService {
 		return response;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.cognitivescale.service.AccountService#calculateInterestByAccountNumber(java.lang.String, java.lang.Integer)
+	/**
+	 * Calculates interest by account number.
+	 *
+	 * @param date          the date
+	 * @param accountNumber the account number
+	 * @return the account balance
 	 */
 	@Override
 	public ResponseUtils calculateInterestByAccountNumber(String date, Integer accountNumber) {

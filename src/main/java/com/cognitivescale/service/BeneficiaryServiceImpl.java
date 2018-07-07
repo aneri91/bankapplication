@@ -24,7 +24,7 @@ import com.cognitivescale.util.ResponseUtils;
  */
 @Service
 public class BeneficiaryServiceImpl implements BeneficiaryService {
-	
+
 	/** The Constant LOG. */
 	private static final Logger LOG = LoggerFactory.getLogger(BeneficiaryServiceImpl.class);
 
@@ -36,8 +36,11 @@ public class BeneficiaryServiceImpl implements BeneficiaryService {
 	@Autowired
 	private AccountDao accountDao;
 
-	/* (non-Javadoc)
-	 * @see com.cognitivescale.service.BeneficiaryService#addBeneficiaryDetails(com.cognitivescale.model.BeneficiaryModel)
+	/**
+	 * Adds beneficiary details.
+	 *
+	 * @param beneficiaryModel the beneficiary model
+	 * @return the beneficiary details
 	 */
 	@Override
 	public ResponseUtils addBeneficiaryDetails(BeneficiaryModel beneficiaryModel) {
@@ -76,8 +79,12 @@ public class BeneficiaryServiceImpl implements BeneficiaryService {
 		return response;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.cognitivescale.service.BeneficiaryService#deleteBeneficiaryDetails(java.lang.Integer, java.lang.Integer)
+	/**
+	 * Delete beneficiary details.
+	 *
+	 * @param beneficiaryAccountNumber the beneficiary account number
+	 * @param accountNumber            the account number
+	 * @return the response
 	 */
 	@Override
 	public ResponseUtils deleteBeneficiaryDetails(Integer beneficiaryAccountNumber, Integer accountNumber) {

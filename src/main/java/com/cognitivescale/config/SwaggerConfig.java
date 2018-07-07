@@ -23,7 +23,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig extends WebMvcConfigurationSupport {
-	
+
 	/**
 	 * Product api.
 	 *
@@ -55,8 +55,10 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
 		return new ApiInfoBuilder().title("Bank API - Cognitive Scale").build();
 	}
 
-	/* (non-Javadoc)
-	 * @see org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport#addResourceHandlers(org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry)
+	/**
+	 * Adds resource handlers.
+	 *
+	 * @param registry the registry
 	 */
 	@Override
 	protected void addResourceHandlers(ResourceHandlerRegistry registry) {
