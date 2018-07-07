@@ -1,7 +1,6 @@
 package com.cognitivescale.controller;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -44,7 +43,7 @@ public class TransactionController {
 	@RequestMapping(value = { "/schedule" }, method = RequestMethod.GET)
 	public ResponseUtils scheduleFunds(@Param(value = "beneficiaryAccountNumber") Integer beneficiaryAccountNumber,
 			@Param(value = "accountNumber") Integer accountNumber, @Param(value = "amount") BigDecimal amount,
-			@Param(value = "datetime") Timestamp datetime) {
+			@Param(value = "datetime") String datetime) {
 		LOG.info("transaction/schedule called");
 		return transactionService.scheduleFunds(beneficiaryAccountNumber, accountNumber, amount, datetime);
 	}

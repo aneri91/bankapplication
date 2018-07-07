@@ -1,7 +1,7 @@
 package com.cognitivescale.service;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,6 +25,7 @@ import com.cognitivescale.util.ResponseUtils;
 @Service
 public class TransactionServiceImpl implements TransactionService {
 	private static final Logger LOG = LoggerFactory.getLogger(TransactionServiceImpl.class);
+
 	@Autowired
 	private TransactionDao transactionDao;
 
@@ -121,9 +122,7 @@ public class TransactionServiceImpl implements TransactionService {
 			} else {
 				response.setMessage(Constants.ACCOUNT_NOT_REGISTERED);
 			}
-		} catch (
-
-		Exception e) {
+		} catch (Exception e) {
 			LOG.error(e.getMessage());
 			response.setMessage("Exception in fund transfer.");
 		}
@@ -132,14 +131,26 @@ public class TransactionServiceImpl implements TransactionService {
 
 	@Override
 	public ResponseUtils scheduleFunds(Integer beneficiaryAccountNumber, Integer accountNumber, BigDecimal amount,
-			Timestamp datetime) {
+			String datetime) {
 		LOG.info("schedule funds");
-		return scheduleTransferFundAtGivenTime(beneficiaryAccountNumber, accountNumber, amount, datetime);
+		ResponseUtils response = new ResponseUtils(Constants.STATUS_ERROR);
+		try {
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+			String currDate = dateFormat.format(new Date());
+			Date currentDate = dateFormat.parse(currDate);
+			Date givenDate = dateFormat.parse(datetime);
+			long millis = givenDate.getTime() - currentDate.getTime();
+			scheduleTransferFundAtGivenTime(beneficiaryAccountNumber, accountNumber, amount, millis);
+		} catch (Exception e) {
+			LOG.error(e.getMessage());
+			response.setMessage("Exception in scheduling fund transfer.");
+		}
+		return response;
 	}
 
-	@Scheduled(cron = "0 0 * * * *")
+	@Scheduled(fixedDelay = 1000)
 	private ResponseUtils scheduleTransferFundAtGivenTime(Integer beneficiaryAccountNumber, Integer accountNumber,
-			BigDecimal amount, Timestamp datetime) {
+			BigDecimal amount, long millis) {
 		LOG.info("schedule transfer funds at give time");
 		return transferFunds(beneficiaryAccountNumber, accountNumber, amount);
 	}
