@@ -17,7 +17,7 @@ import io.swagger.annotations.Api;
 
 @RestController
 @RequestMapping("beneficiary")
-@Api(value="beneficiary")
+@Api(value = "beneficiary")
 public class BeneficiaryController {
 
 	private static final Logger LOG = LoggerFactory.getLogger(BeneficiaryController.class);

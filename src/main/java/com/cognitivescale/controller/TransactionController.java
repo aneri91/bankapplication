@@ -19,7 +19,7 @@ import io.swagger.annotations.Api;
 
 @RestController
 @RequestMapping("/transaction")
-@Api(value="transaction")
+@Api(value = "transaction")
 public class TransactionController {
 	private static final Logger LOG = LoggerFactory.getLogger(TransactionController.class);
 
