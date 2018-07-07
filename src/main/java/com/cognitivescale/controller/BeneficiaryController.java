@@ -15,22 +15,40 @@ import com.cognitivescale.util.ResponseUtils;
 
 import io.swagger.annotations.Api;
 
+/**
+ * The Class BeneficiaryController.
+ */
 @RestController
 @RequestMapping("beneficiary")
 @Api(value = "beneficiary")
 public class BeneficiaryController {
 
+	/** The Constant LOG. */
 	private static final Logger LOG = LoggerFactory.getLogger(BeneficiaryController.class);
 
+	/** The beneficiary service. */
 	@Autowired
 	private BeneficiaryService beneficiaryService;
 
+	/**
+	 * Adds the beneficiary.
+	 *
+	 * @param beneficiaryModel the beneficiary model
+	 * @return the response utils
+	 */
 	@RequestMapping(value = { "/add" }, method = RequestMethod.POST)
 	public ResponseUtils addBeneficiary(@RequestBody BeneficiaryModel beneficiaryModel) {
 		LOG.info("beneficiary/add called");
 		return beneficiaryService.addBeneficiaryDetails(beneficiaryModel);
 	}
 
+	/**
+	 * Delete beneficiary.
+	 *
+	 * @param beneficiaryAccountNumber the beneficiary account number
+	 * @param accountNumber the account number
+	 * @return the response utils
+	 */
 	@RequestMapping(value = { "/delete" }, method = RequestMethod.DELETE)
 	public ResponseUtils deleteBeneficiary(@Param(value = "beneficiaryAccountNumber") Integer beneficiaryAccountNumber,
 			@Param(value = "accountNumber") Integer accountNumber) {

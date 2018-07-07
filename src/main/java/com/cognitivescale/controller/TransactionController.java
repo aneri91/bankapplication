@@ -17,15 +17,30 @@ import com.cognitivescale.util.ResponseUtils;
 
 import io.swagger.annotations.Api;
 
+/**
+ * The Class TransactionController.
+ */
 @RestController
 @RequestMapping("/transaction")
 @Api(value = "transaction")
 public class TransactionController {
+	
+	/** The Constant LOG. */
 	private static final Logger LOG = LoggerFactory.getLogger(TransactionController.class);
 
+	/** The transaction service. */
 	@Autowired
 	private TransactionService transactionService;
 
+	/**
+	 * Transaction summary.
+	 *
+	 * @param toDate the to date
+	 * @param fromDate the from date
+	 * @param accountNumber the account number
+	 * @return the response utils
+	 * @throws Exception the exception
+	 */
 	@RequestMapping(value = { "/statement" }, method = RequestMethod.GET)
 	public ResponseUtils transactionSummary(@Param(value = "toDate") String toDate,
 			@Param(value = "fromDate") String fromDate, @Param(value = "accountNumber") Integer accountNumber)
@@ -36,6 +51,14 @@ public class TransactionController {
 		return transactionService.findAllTransactionsByAccountNumber(accountNumber, fromParserDate, toParserDate);
 	}
 
+	/**
+	 * Transfer funds.
+	 *
+	 * @param beneficiaryAccountNumber the beneficiary account number
+	 * @param accountNumber the account number
+	 * @param amount the amount
+	 * @return the response utils
+	 */
 	@RequestMapping(value = { "/funds" }, method = RequestMethod.GET)
 	public ResponseUtils transferFunds(@Param(value = "beneficiaryAccountNumber") Integer beneficiaryAccountNumber,
 			@Param(value = "accountNumber") Integer accountNumber, @Param(value = "amount") BigDecimal amount) {
@@ -43,6 +66,15 @@ public class TransactionController {
 		return transactionService.transferFunds(beneficiaryAccountNumber, accountNumber, amount);
 	}
 
+	/**
+	 * Schedule funds.
+	 *
+	 * @param beneficiaryAccountNumber the beneficiary account number
+	 * @param accountNumber the account number
+	 * @param amount the amount
+	 * @param datetime the datetime
+	 * @return the response utils
+	 */
 	@RequestMapping(value = { "/schedule" }, method = RequestMethod.GET)
 	public ResponseUtils scheduleFunds(@Param(value = "beneficiaryAccountNumber") Integer beneficiaryAccountNumber,
 			@Param(value = "accountNumber") Integer accountNumber, @Param(value = "amount") BigDecimal amount,
