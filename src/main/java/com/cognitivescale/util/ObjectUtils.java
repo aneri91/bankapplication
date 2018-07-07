@@ -3,12 +3,15 @@ package com.cognitivescale.util;
 import java.util.Collection;
 import java.util.Map;
 
+/**
+ * The Class ObjectUtils.
+ */
 public class ObjectUtils {
 
 	/**
 	 * This method returns true if the collection is null or is empty.
-	 * 
-	 * @param collection
+	 *
+	 * @param collection the collection
 	 * @return true | false
 	 */
 	public static boolean isEmpty(Collection<?> collection) {
@@ -20,8 +23,8 @@ public class ObjectUtils {
 
 	/**
 	 * This method returns true of the map is null or is empty.
-	 * 
-	 * @param map
+	 *
+	 * @param map the map
 	 * @return true | false
 	 */
 	public static boolean isEmpty(Map<?, ?> map) {
@@ -33,8 +36,8 @@ public class ObjectUtils {
 
 	/**
 	 * This method returns true if the objet is null.
-	 * 
-	 * @param object
+	 *
+	 * @param object the object
 	 * @return true | false
 	 */
 	public static boolean isEmpty(Object object) {
@@ -46,8 +49,8 @@ public class ObjectUtils {
 
 	/**
 	 * This method returns true if the input array is null or its length is zero.
-	 * 
-	 * @param array
+	 *
+	 * @param array the array
 	 * @return true | false
 	 */
 	public static boolean isEmpty(Object[] array) {
@@ -59,8 +62,8 @@ public class ObjectUtils {
 
 	/**
 	 * This method returns true if the input string is null or its length is zero.
-	 * 
-	 * @param string
+	 *
+	 * @param string the string
 	 * @return true | false
 	 */
 	public static boolean isEmpty(String string) {
@@ -72,8 +75,8 @@ public class ObjectUtils {
 
 	/**
 	 * This method returns true if the collection is null or is empty.
-	 * 
-	 * @param collection
+	 *
+	 * @param collection the collection
 	 * @return true | false
 	 */
 	public static boolean isNotEmpty(Collection<?> collection) {
@@ -85,8 +88,8 @@ public class ObjectUtils {
 
 	/**
 	 * This method returns true of the map is not null or is not empty.
-	 * 
-	 * @param map
+	 *
+	 * @param map the map
 	 * @return true | false
 	 */
 	public static boolean isNotEmpty(Map<?, ?> map) {
@@ -98,8 +101,8 @@ public class ObjectUtils {
 
 	/**
 	 * This method returns true if the object is not null.
-	 * 
-	 * @param object
+	 *
+	 * @param object the object
 	 * @return true | false
 	 */
 	public static boolean isNotEmpty(Object object) {
@@ -112,8 +115,8 @@ public class ObjectUtils {
 	/**
 	 * This method returns true if the input array is not null or its length is
 	 * greater than zero.
-	 * 
-	 * @param array
+	 *
+	 * @param array the array
 	 * @return true | false
 	 */
 	public static boolean isNotEmpty(Object[] array) {
@@ -126,8 +129,8 @@ public class ObjectUtils {
 	/**
 	 * This method returns true if the input string is not null or its length is
 	 * greater than zero.
-	 * 
-	 * @param string
+	 *
+	 * @param string the string
 	 * @return true | false
 	 */
 	public static boolean isNotEmpty(String string) {
@@ -137,6 +140,9 @@ public class ObjectUtils {
 		return false;
 	}
 
+	/**
+	 * Instantiates a new object utils.
+	 */
 	private ObjectUtils() {
 		throw new IllegalAccessError("Utility class");
 	}

@@ -19,16 +19,26 @@ import com.cognitivescale.util.Constants;
 import com.cognitivescale.util.ObjectUtils;
 import com.cognitivescale.util.ResponseUtils;
 
+/**
+ * The Class BeneficiaryServiceImpl.
+ */
 @Service
 public class BeneficiaryServiceImpl implements BeneficiaryService {
+	
+	/** The Constant LOG. */
 	private static final Logger LOG = LoggerFactory.getLogger(BeneficiaryServiceImpl.class);
 
+	/** The beneficiary dao. */
 	@Autowired
 	private BeneficiaryDao beneficiaryDao;
 
+	/** The account dao. */
 	@Autowired
 	private AccountDao accountDao;
 
+	/* (non-Javadoc)
+	 * @see com.cognitivescale.service.BeneficiaryService#addBeneficiaryDetails(com.cognitivescale.model.BeneficiaryModel)
+	 */
 	@Override
 	public ResponseUtils addBeneficiaryDetails(BeneficiaryModel beneficiaryModel) {
 		LOG.info("add beneficiary : " + beneficiaryModel.getBeneficiaryAccountNumber());
@@ -66,6 +76,9 @@ public class BeneficiaryServiceImpl implements BeneficiaryService {
 		return response;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.cognitivescale.service.BeneficiaryService#deleteBeneficiaryDetails(java.lang.Integer, java.lang.Integer)
+	 */
 	@Override
 	public ResponseUtils deleteBeneficiaryDetails(Integer beneficiaryAccountNumber, Integer accountNumber) {
 		LOG.info("remove beneficiary : " + beneficiaryAccountNumber);
@@ -107,6 +120,12 @@ public class BeneficiaryServiceImpl implements BeneficiaryService {
 		return response;
 	}
 
+	/**
+	 * Builds the beneficiary.
+	 *
+	 * @param beneficiaryModel the beneficiary model
+	 * @return the beneficiary
+	 */
 	private Beneficiary buildBeneficiary(BeneficiaryModel beneficiaryModel) {
 		Beneficiary beneficiary = new Beneficiary();
 		beneficiary.setBeneficiaryName(beneficiaryModel.getName());

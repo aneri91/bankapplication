@@ -22,19 +22,30 @@ import com.cognitivescale.util.Constants;
 import com.cognitivescale.util.ObjectUtils;
 import com.cognitivescale.util.ResponseUtils;
 
+/**
+ * The Class TransactionServiceImpl.
+ */
 @Service
 public class TransactionServiceImpl implements TransactionService {
+	
+	/** The Constant LOG. */
 	private static final Logger LOG = LoggerFactory.getLogger(TransactionServiceImpl.class);
 
+	/** The transaction dao. */
 	@Autowired
 	private TransactionDao transactionDao;
 
+	/** The beneficiary dao. */
 	@Autowired
 	private BeneficiaryDao beneficiaryDao;
 
+	/** The account dao. */
 	@Autowired
 	private AccountDao accountDao;
 
+	/* (non-Javadoc)
+	 * @see com.cognitivescale.service.TransactionService#findAllTransactionsByAccountNumber(java.lang.Integer, java.util.Date, java.util.Date)
+	 */
 	@Override
 	public ResponseUtils findAllTransactionsByAccountNumber(Integer accountNumber, Date fromDate, Date toDate) {
 		LOG.info("find all transactions by account number");
@@ -66,6 +77,9 @@ public class TransactionServiceImpl implements TransactionService {
 		return response;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.cognitivescale.service.TransactionService#transferFunds(java.lang.Integer, java.lang.Integer, java.math.BigDecimal)
+	 */
 	@Override
 	public ResponseUtils transferFunds(Integer beneficiaryAccountNumber, Integer accountNumber, BigDecimal amount) {
 		LOG.info("fund transfer");
@@ -129,6 +143,9 @@ public class TransactionServiceImpl implements TransactionService {
 		return response;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.cognitivescale.service.TransactionService#scheduleFunds(java.lang.Integer, java.lang.Integer, java.math.BigDecimal, java.lang.String)
+	 */
 	@Override
 	public ResponseUtils scheduleFunds(Integer beneficiaryAccountNumber, Integer accountNumber, BigDecimal amount,
 			String datetime) {
@@ -148,6 +165,15 @@ public class TransactionServiceImpl implements TransactionService {
 		return response;
 	}
 
+	/**
+	 * Schedule transfer fund at given time.
+	 *
+	 * @param beneficiaryAccountNumber the beneficiary account number
+	 * @param accountNumber the account number
+	 * @param amount the amount
+	 * @param millis the millis
+	 * @return the response utils
+	 */
 	@Scheduled(fixedDelay = 1000)
 	private ResponseUtils scheduleTransferFundAtGivenTime(Integer beneficiaryAccountNumber, Integer accountNumber,
 			BigDecimal amount, long millis) {
@@ -155,6 +181,14 @@ public class TransactionServiceImpl implements TransactionService {
 		return transferFunds(beneficiaryAccountNumber, accountNumber, amount);
 	}
 
+	/**
+	 * Builds the transactions.
+	 *
+	 * @param amount the amount
+	 * @param accountNumber the account number
+	 * @param type the type
+	 * @return the transaction
+	 */
 	private Transaction buildTransactions(BigDecimal amount, Integer accountNumber, String type) {
 		Transaction transaction = new Transaction();
 		transaction.setAmount(amount);

@@ -12,11 +12,23 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+/**
+ * The Class PasswordUtils.
+ */
 public class PasswordUtils {
+	
+	/** The Constant LOG. */
 	private static final Log LOG = LogFactory.getLog(PasswordUtils.class);
+	
+	/** The secret key. */
 	private static SecretKeySpec secretKey;
+	
+	/** The key. */
 	private static byte[] key;
 
+	/**
+	 * Instantiates a new password utils.
+	 */
 	private PasswordUtils() {
 		super();
 	}
@@ -29,6 +41,11 @@ public class PasswordUtils {
 		}
 	}
 
+	/**
+	 * Sets the key.
+	 *
+	 * @param myKey the new key
+	 */
 	public static void setKey(String myKey) {
 		MessageDigest sha = null;
 		try {
@@ -42,6 +59,12 @@ public class PasswordUtils {
 		}
 	}
 
+	/**
+	 * Decrypt.
+	 *
+	 * @param data the data
+	 * @return the string
+	 */
 	public static String decrypt(String data) {
 		try {
 			Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5PADDING");
@@ -54,6 +77,12 @@ public class PasswordUtils {
 		return null;
 	}
 
+	/**
+	 * Encrypt.
+	 *
+	 * @param data the data
+	 * @return the string
+	 */
 	public static String encrypt(byte[] data) {
 		try {
 			Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5PADDING");

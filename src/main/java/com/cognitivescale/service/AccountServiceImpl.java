@@ -18,13 +18,22 @@ import com.cognitivescale.util.ObjectUtils;
 import com.cognitivescale.util.PasswordUtils;
 import com.cognitivescale.util.ResponseUtils;
 
+/**
+ * The Class AccountServiceImpl.
+ */
 @Service
 public class AccountServiceImpl implements AccountService {
+	
+	/** The Constant LOG. */
 	private static final Logger LOG = LoggerFactory.getLogger(AccountServiceImpl.class);
 
+	/** The account dao. */
 	@Autowired
 	private AccountDao accountDao;
 
+	/* (non-Javadoc)
+	 * @see com.cognitivescale.service.AccountService#save(com.cognitivescale.model.AccountModel)
+	 */
 	@Override
 	public ResponseUtils save(AccountModel accountModel) {
 		LOG.info("create account");
@@ -54,6 +63,9 @@ public class AccountServiceImpl implements AccountService {
 		return response;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.cognitivescale.service.AccountService#findByUsername(java.lang.String)
+	 */
 	@Override
 	public ResponseUtils findByUsername(String username) {
 		LOG.info("find by username");
@@ -72,6 +84,9 @@ public class AccountServiceImpl implements AccountService {
 		return response;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.cognitivescale.service.AccountService#validateUser(java.lang.String, java.lang.String)
+	 */
 	@Override
 	public ResponseUtils validateUser(String username, String password) {
 		LOG.info("validate user");
@@ -96,6 +111,9 @@ public class AccountServiceImpl implements AccountService {
 		return response;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.cognitivescale.service.AccountService#getBalanceInfoByAccountNumber(java.lang.Integer)
+	 */
 	@Override
 	public ResponseUtils getBalanceInfoByAccountNumber(Integer accountNumber) {
 		LOG.info("get balance info");
@@ -120,6 +138,9 @@ public class AccountServiceImpl implements AccountService {
 		return response;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.cognitivescale.service.AccountService#calculateInterestByAccountNumber(java.lang.String, java.lang.Integer)
+	 */
 	@Override
 	public ResponseUtils calculateInterestByAccountNumber(String date, Integer accountNumber) {
 		LOG.info("calculate interest by account number");
@@ -157,6 +178,12 @@ public class AccountServiceImpl implements AccountService {
 		return response;
 	}
 
+	/**
+	 * Builds the user account.
+	 *
+	 * @param accountModel the account model
+	 * @return the account
+	 */
 	private Account buildUserAccount(AccountModel accountModel) {
 		Account account = new Account();
 		account.setUsername(accountModel.getUsername());
