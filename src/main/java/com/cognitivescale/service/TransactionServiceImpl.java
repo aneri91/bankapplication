@@ -38,9 +38,13 @@ public class TransactionServiceImpl implements TransactionService {
 	public ResponseUtils findAllTransactionsByAccountNumber(Integer accountNumber, Date fromDate, Date toDate) {
 		LOG.info("find all transactions by account number");
 		ResponseUtils response = new ResponseUtils(Constants.STATUS_ERROR);
-		Transaction transaction = transactionDao.findByAccountNumber(accountNumber);
 		try {
-			if (transaction != null) {
+			if (ObjectUtils.isEmpty(accountNumber)) {
+				response.setMessage("Account Number can not be empty.");
+				return response;
+			}
+			Transaction transaction = transactionDao.findByAccountNumber(accountNumber);
+			if (!ObjectUtils.isEmpty(transaction)) {
 				List<Transaction> transactionList = transactionDao.transactionDetailsByAccountAndDates(accountNumber,
 						fromDate, toDate);
 				System.out.println(transactionList.size());
@@ -81,28 +85,15 @@ public class TransactionServiceImpl implements TransactionService {
 					if (account.getBalance().compareTo(amount) < 0 || account.getBalance().compareTo(amount) < 1) {
 						response.setMessage("Insufficient balance. Please load money to your registered account.");
 					} else {
-						Transaction transactionMaster = transactionDao.findByAccountNumber(accountNumber);
-						Transaction beneficiaryTransactionMaster = transactionDao
-								.findByAccountNumber(beneficiaryAccountNumber);
-						if (ObjectUtils.isEmpty(transactionMaster)) {
-							transactionMaster = buildTransactions(amount, accountNumber, "debit");
-						} else {
-							transactionMaster.setAmount(transactionMaster.getAmount().add(amount));
-							transactionMaster.setUpdateDate(new Date());
-						}
-						if (ObjectUtils.isEmpty(beneficiaryTransactionMaster)) {
-							beneficiaryTransactionMaster = buildTransactions(amount, beneficiaryAccountNumber,
-									"credit");
-						} else {
-							beneficiaryTransactionMaster.setAmount(beneficiaryTransactionMaster.getAmount().add(amount));
-							beneficiaryTransactionMaster.setUpdateDate(new Date());
-						}
+						Transaction transactionMaster = buildTransactions(amount, accountNumber, "debit");
+						Transaction beneficiaryTransactionMaster = buildTransactions(amount, beneficiaryAccountNumber,
+								"credit");
 						account.setBalance(account.getBalance().subtract(amount));
 						beneficiary.setBalance(beneficiary.getBalance().add(amount));
-						
+
 						transactionDao.save(transactionMaster);
 						transactionDao.save(beneficiaryTransactionMaster);
-						
+
 						List<Transaction> addUpdateTransactions = null;
 						if (account.getTransactions() == null) {
 							addUpdateTransactions = new ArrayList<>();
@@ -112,7 +103,7 @@ public class TransactionServiceImpl implements TransactionService {
 						addUpdateTransactions.add(beneficiaryTransactionMaster);
 						account.setTransactions(addUpdateTransactions);
 						accountDao.save(account);
-						
+
 						List<Transaction> list = new ArrayList<>();
 						list.add(transactionMaster);
 						list.add(beneficiaryTransactionMaster);
