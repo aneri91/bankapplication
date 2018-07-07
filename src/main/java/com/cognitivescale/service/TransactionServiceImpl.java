@@ -140,6 +140,7 @@ public class TransactionServiceImpl implements TransactionService {
 	@Scheduled(cron = "0 0 * * * *")
 	private ResponseUtils scheduleTransferFundAtGivenTime(Integer beneficiaryAccountNumber, Integer accountNumber,
 			BigDecimal amount, Timestamp datetime) {
+		LOG.info("schedule transfer funds at give time");
 		return transferFunds(beneficiaryAccountNumber, accountNumber, amount);
 	}
 
