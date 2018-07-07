@@ -17,9 +17,18 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+/**
+ * The Class SwaggerConfig.
+ */
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig extends WebMvcConfigurationSupport {
+	
+	/**
+	 * Product api.
+	 *
+	 * @return the docket
+	 */
 	@Bean
 	public Docket productApi() {
 		return new Docket(DocumentationType.SWAGGER_2).select()
@@ -27,15 +36,28 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
 				.apiInfo(metaData());
 	}
 
+	/**
+	 * Post paths.
+	 *
+	 * @return the predicate
+	 */
 	@SuppressWarnings("unchecked")
 	private Predicate<String> postPaths() {
 		return or(regex("/account.*"), regex("/beneficiary.*"), regex("/transaction.*"));
 	}
 
+	/**
+	 * Meta data.
+	 *
+	 * @return the api info
+	 */
 	private ApiInfo metaData() {
 		return new ApiInfoBuilder().title("Bank API - Cognitive Scale").build();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport#addResourceHandlers(org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry)
+	 */
 	@Override
 	protected void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
