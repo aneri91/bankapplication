@@ -2,6 +2,8 @@ package com.cognitivescale.controller;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +23,16 @@ public class TransactionController {
 
 	@Autowired
 	private TransactionService transactionService;
+
+	@RequestMapping(value = { "/statement" }, method = RequestMethod.GET)
+	public ResponseUtils transactionSummary(@Param(value = "toDate") String toDate,
+			@Param(value = "fromDate") String fromDate, @Param(value = "accountNumber") Integer accountNumber)
+			throws Exception {
+		LOG.info("transaction/statement called");
+		Date fromParserDate = new SimpleDateFormat("yyyy-MM-dd").parse(fromDate);
+		Date toParserDate = new SimpleDateFormat("yyyy-MM-dd").parse(toDate);
+		return transactionService.findAllTransactionsByAccountNumber(accountNumber, fromParserDate, toParserDate);
+	}
 
 	@RequestMapping(value = { "/funds" }, method = RequestMethod.GET)
 	public ResponseUtils transferFunds(@Param(value = "beneficiaryAccountNumber") Integer beneficiaryAccountNumber,

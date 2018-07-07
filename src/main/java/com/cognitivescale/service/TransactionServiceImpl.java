@@ -35,8 +35,8 @@ public class TransactionServiceImpl implements TransactionService {
 	private AccountDao accountDao;
 
 	@Override
-	public ResponseUtils findAllTransactions(Integer accountNumber, Date fromDate, Date toDate) {
-		LOG.info("transaction summary");
+	public ResponseUtils findAllTransactionsByAccountNumber(Integer accountNumber, Date fromDate, Date toDate) {
+		LOG.info("find all transactions by account number");
 		ResponseUtils response = new ResponseUtils(Constants.STATUS_ERROR);
 		Transaction transaction = transactionDao.findByAccountNumber(accountNumber);
 		try {

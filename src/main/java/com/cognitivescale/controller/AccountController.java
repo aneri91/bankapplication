@@ -1,8 +1,5 @@
 package com.cognitivescale.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -16,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cognitivescale.model.AccountModel;
 import com.cognitivescale.service.AccountService;
-import com.cognitivescale.service.TransactionService;
 import com.cognitivescale.util.ResponseUtils;
 
 @RestController
@@ -26,9 +22,6 @@ public class AccountController {
 
 	@Autowired
 	private AccountService accountService;
-
-	@Autowired
-	private TransactionService transactionService;
 
 	@RequestMapping(value = "/create_account", method = RequestMethod.POST)
 	public ResponseUtils createAccount(@Valid @RequestBody AccountModel accountModel) {
@@ -46,16 +39,6 @@ public class AccountController {
 	public ResponseUtils getBalanceInfo(@Param(value = "accountNumber") Integer accountNumber) {
 		LOG.info("account/balance called");
 		return accountService.getBalanceInfoByAccountNumber(accountNumber);
-	}
-
-	@RequestMapping(value = { "/statement" }, method = RequestMethod.GET)
-	public ResponseUtils transactionSummary(@Param(value = "toDate") String toDate,
-			@Param(value = "fromDate") String fromDate, @Param(value = "accountNumber") Integer accountNumber)
-			throws Exception {
-		LOG.info("account/statement called");
-		Date fromParserDate = new SimpleDateFormat("yyyy-MM-dd").parse(fromDate);
-		Date toParserDate = new SimpleDateFormat("yyyy-MM-dd").parse(toDate);
-		return transactionService.findAllTransactions(accountNumber, fromParserDate, toParserDate);
 	}
 
 	@RequestMapping(value = { "/calculate_interest" }, method = RequestMethod.GET)
