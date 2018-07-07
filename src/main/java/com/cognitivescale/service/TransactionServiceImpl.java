@@ -43,16 +43,20 @@ public class TransactionServiceImpl implements TransactionService {
 				response.setMessage("Account Number can not be empty.");
 				return response;
 			}
-			Transaction transaction = transactionDao.findByAccountNumber(accountNumber);
-			if (!ObjectUtils.isEmpty(transaction)) {
+			Account account = accountDao.findByAccountNumber(accountNumber);
+			if (!ObjectUtils.isEmpty(account)) {
 				List<Transaction> transactionList = transactionDao.transactionDetailsByAccountAndDates(accountNumber,
 						fromDate, toDate);
-				System.out.println(transactionList.size());
-				response.setData(transactionList);
-				response.setStatus(Constants.STATUS_SUCCESS);
-				response.setMessage("Transaction list is retrieved successfully.");
+				if (transactionList.size() > 0) {
+					response.setData(transactionList);
+					response.setStatus(Constants.STATUS_SUCCESS);
+					response.setMessage("Transaction list is retrieved successfully.");
+				} else {
+					response.setMessage("No transactions exist for this account number.");
+				}
+
 			} else {
-				response.setMessage("No transactions exist for this account number.");
+				response.setMessage(Constants.ACCOUNT_NOT_REGISTERED);
 			}
 		} catch (Exception e) {
 			LOG.error(e.getMessage());

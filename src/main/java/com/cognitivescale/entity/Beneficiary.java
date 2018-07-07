@@ -17,7 +17,6 @@ public class Beneficiary {
 	private Integer accountNumber;
 	private BigDecimal balance;
 	private Date createdDate;
-	private List<Account> accounts;
 
 	public String getId() {
 		return id;
@@ -89,14 +88,6 @@ public class Beneficiary {
 
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
-	}
-
-	public List<Account> getAccounts() {
-		return accounts;
-	}
-
-	public void setAccounts(List<Account> accounts) {
-		this.accounts = accounts;
 	}
 
 	public String getCurrency() {

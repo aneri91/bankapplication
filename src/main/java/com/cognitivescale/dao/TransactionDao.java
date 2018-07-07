@@ -13,7 +13,7 @@ import com.cognitivescale.entity.Transaction;
 public interface TransactionDao extends MongoRepository<Transaction, Long> {
 
 	@Query(value = "{ 'accountNumber' : ?0 }")
-	Transaction findByAccountNumber(Integer accountNumber);
+	List<Transaction> findByAccountNumber(Integer accountNumber);
 
 	@Query(value = "{ 'accountNumber' : ?0 },{ 'fromDate' : ?1 },{ 'toDate' : ?1 }")
 	List<Transaction> transactionDetailsByAccountAndDates(Integer accountNumber, Date fromDate, Date toDate);

@@ -17,7 +17,6 @@ public class Transaction {
 	private Date updateDate;
 	private String type;
 	private Integer accountNumber;
-	private List<Account> accounts;
 
 	public String getId() {
 		return id;
@@ -65,14 +64,6 @@ public class Transaction {
 
 	public void setAccountNumber(Integer accountNumber) {
 		this.accountNumber = accountNumber;
-	}
-
-	public List<Account> getAccounts() {
-		return accounts;
-	}
-
-	public void setAccounts(List<Account> accounts) {
-		this.accounts = accounts;
 	}
 
 }
