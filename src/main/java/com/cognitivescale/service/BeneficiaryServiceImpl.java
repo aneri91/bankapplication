@@ -135,7 +135,7 @@ public class BeneficiaryServiceImpl implements BeneficiaryService {
 	 */
 	private Beneficiary buildBeneficiary(BeneficiaryModel beneficiaryModel) {
 		Beneficiary beneficiary = new Beneficiary();
-		beneficiary.setBeneficiaryName(beneficiaryModel.getName());
+		beneficiary.setBeneficiaryName(beneficiaryModel.getBeneficiaryName());
 		beneficiary.setBeneficiaryAccountNumber(beneficiaryModel.getBeneficiaryAccountNumber());
 		beneficiary.setIfscCode(beneficiaryModel.getIfscCode());
 		beneficiary.setNickName(beneficiaryModel.getNickName());

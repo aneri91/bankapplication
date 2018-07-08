@@ -7,38 +7,38 @@ import java.util.Date;
  * The Class BeneficiaryModel.
  */
 public class BeneficiaryModel {
-	
+
 	/** The currency. */
-	private String name, ifscCode, nickName, accountType, currency;
-	
+	private String beneficiaryName, ifscCode, nickName, accountType, currency;
+
 	/** The beneficiary account number. */
 	private Integer beneficiaryAccountNumber;
-	
+
 	/** The account number. */
 	private Integer accountNumber;
-	
+
 	/** The created date. */
 	private Date createdDate;
-	
+
 	/** The balance. */
 	private BigDecimal balance;
 
 	/**
-	 * Gets the name.
+	 * Gets the beneficiary name.
 	 *
-	 * @return the name
+	 * @return the beneficiary name
 	 */
-	public String getName() {
-		return name;
+	public String getBeneficiaryName() {
+		return beneficiaryName;
 	}
 
 	/**
-	 * Sets the name.
+	 * Sets the beneficiary name.
 	 *
-	 * @param name the new name
+	 * @param beneficiaryName the new beneficiary name
 	 */
-	public void setName(String name) {
-		this.name = name;
+	public void setBeneficiaryName(String beneficiaryName) {
+		this.beneficiaryName = beneficiaryName;
 	}
 
 	/**
