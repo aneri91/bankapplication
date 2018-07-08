@@ -12,6 +12,8 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.jayway.restassured.RestAssured;
+import com.jayway.restassured.parsing.Parser;
 import com.jayway.restassured.response.Response;
 
 public class AccountUtils {
@@ -21,12 +23,11 @@ public class AccountUtils {
 		String username = RandomStringUtils.randomAlphabetic(10);
 		String password = RandomStringUtils.randomAlphabetic(10);
 		long phoneNumber = new Random().nextLong();
-		BigDecimal balance = new BigDecimal(Math.random());
 		accountMap.put("username", username);
 		accountMap.put("password", password);
 		accountMap.put("confirmPassword", password);
 		accountMap.put("phoneNumber", String.valueOf(phoneNumber));
-		accountMap.put("balance", String.valueOf(balance));
+		accountMap.put("balance", String.valueOf(BigDecimal.TEN));
 		return accountMap;
 	}
 
@@ -46,10 +47,15 @@ public class AccountUtils {
 
 	public static String buildResponse(Response response) {
 		JsonObject jsonObject = (JsonObject) new JsonParser().parse(response.asString());
-		String message = jsonObject.get("message").getAsString();
 		String status = jsonObject.get("status").getAsString();
+		String message = jsonObject.get("message").getAsString();
 		assertEquals(true, response.getStatusCode() == 200);
 		assertThat(status).isEqualTo(TestConstants.STATUS_SUCCESS);
 		return message;
+	}
+
+	public static void config() {
+		RestAssured.baseURI = "http://localhost:5554";
+		RestAssured.defaultParser = Parser.JSON;
 	}
 }

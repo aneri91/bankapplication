@@ -16,7 +16,6 @@ import com.cognitivescale.util.AccountUtils;
 import com.cognitivescale.util.TestConstants;
 import com.google.gson.Gson;
 import com.jayway.restassured.RestAssured;
-import com.jayway.restassured.parsing.Parser;
 import com.jayway.restassured.response.Response;
 
 @RunWith(SpringRunner.class)
@@ -26,8 +25,7 @@ public class BeneficiaryControllerTest {
 
 	@Before
 	public void setUpConfig() {
-		RestAssured.baseURI = "http://localhost:5554";
-		RestAssured.defaultParser = Parser.JSON;
+		AccountUtils.config();
 	}
 
 	@Test
@@ -50,7 +48,7 @@ public class BeneficiaryControllerTest {
 		deleteBeneficiary(Integer.parseInt(beneficiaryMap.get("beneficiaryAccountNumber")), accountNumber);
 	}
 
-	private void addBeneficiary(Map<String, String> beneficiaryMap) {
+	public static void addBeneficiary(Map<String, String> beneficiaryMap) {
 		Response response = RestAssured.given().contentType("application/json").accept("application/json")
 				.body(new Gson().toJson(beneficiaryMap)).when().post("/beneficiary/add");
 		String beneficiaryMessage = AccountUtils.buildResponse(response);

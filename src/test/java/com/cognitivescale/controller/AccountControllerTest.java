@@ -19,7 +19,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.jayway.restassured.RestAssured;
-import com.jayway.restassured.parsing.Parser;
 import com.jayway.restassured.response.Response;
 
 @RunWith(SpringRunner.class)
@@ -29,8 +28,7 @@ public class AccountControllerTest {
 
 	@Before
 	public void setUpConfig() {
-		RestAssured.baseURI = "http://localhost:5554";
-		RestAssured.defaultParser = Parser.JSON;
+		AccountUtils.config();
 	}
 
 	@Test

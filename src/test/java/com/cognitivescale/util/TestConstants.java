@@ -9,6 +9,9 @@ public class TestConstants {
 
 	public static final String BENEFICIARY_CREATED = "Beneficiary is added successfully.";
 	public static final String BENEFICIARY_DELETED = "Beneficiary is deleted successfully.";
+	
+	public static final String TRANSACTION_LIST = "Transaction list is retrieved successfully.";
+	public static final String TRANSFERRED_FUNDS = "Amount has been transferred successfully.";
 
 	public static final String STATUS_SUCCESS = "Success";
 	public static final String STATUS_ERROR = "Failure";

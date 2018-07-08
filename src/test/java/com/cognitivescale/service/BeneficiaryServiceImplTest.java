@@ -1,10 +1,8 @@
 package com.cognitivescale.service;
 
 import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -19,27 +17,25 @@ import com.cognitivescale.entity.Beneficiary;
 public class BeneficiaryServiceImplTest {
 
 	@TestConfiguration
-    static class EmployeeServiceImplTestContextConfiguration {
-  
-        @Bean
-        public BeneficiaryService beneficiaryService() {
-            return new BeneficiaryServiceImpl();
-        }
-    }
-	
-	@Autowired
-	private BeneficiaryService beneficiaryService;
-	
+	static class EmployeeServiceImplTestContextConfiguration {
+
+		@Bean
+		public BeneficiaryService beneficiaryService() {
+			return new BeneficiaryServiceImpl();
+		}
+	}
+
 	@MockBean
 	private BeneficiaryDao beneficiaryDao;
-	
+
 	@Before
 	public void setUp() {
-	    Beneficiary beneficiary = new Beneficiary();
-	    beneficiary.setAccountNumber(946786736);
-	    Mockito.when(beneficiaryDao.findByBeneficiaryAccountNumber(beneficiary.getAccountNumber())).thenReturn(beneficiary);
+		Beneficiary beneficiary = new Beneficiary();
+		beneficiary.setAccountNumber(946786736);
+		Mockito.when(beneficiaryDao.findByBeneficiaryAccountNumber(beneficiary.getAccountNumber()))
+				.thenReturn(beneficiary);
 	}
-	
+
 //	@Test
 //	public void whenValidName_thenEmployeeShouldBeFound() {
 //	   Integer beneficiaryAccountNumber = 946786736;
