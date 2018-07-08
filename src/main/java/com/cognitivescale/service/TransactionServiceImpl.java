@@ -123,16 +123,6 @@ public class TransactionServiceImpl implements TransactionService {
 						transactionDao.save(transactionMaster);
 						transactionDao.save(beneficiaryTransactionMaster);
 
-						List<Transaction> addUpdateTransactions = null;
-						if (account.getTransactions() == null) {
-							addUpdateTransactions = new ArrayList<>();
-						} else {
-							addUpdateTransactions = account.getTransactions();
-						}
-						addUpdateTransactions.add(beneficiaryTransactionMaster);
-						account.setTransactions(addUpdateTransactions);
-						accountDao.save(account);
-
 						List<Transaction> list = new ArrayList<>();
 						list.add(transactionMaster);
 						list.add(beneficiaryTransactionMaster);

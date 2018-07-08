@@ -73,7 +73,7 @@ public class TransactionControllerTest {
 				.param("accountNumber", accountNumber).param("amount", 9).when().get("/transaction/funds");
 		String transactionMessage = AccountUtils.buildResponse(response);
 		assertThat(transactionMessage).isEqualTo(TestConstants.TRANSFERRED_FUNDS);
-		LOG.info("/transaction/funds ::: " + response.asString());
+		LOG.info("/transaction/funds response ::: " + response.asString());
 	}
 
 	/**
