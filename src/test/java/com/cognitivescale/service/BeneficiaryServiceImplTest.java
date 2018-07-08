@@ -36,14 +36,4 @@ public class BeneficiaryServiceImplTest {
 				.thenReturn(beneficiary);
 	}
 
-//	@Test
-//	public void whenValidName_thenEmployeeShouldBeFound() {
-//	   Integer beneficiaryAccountNumber = 946786736;
-//	   beneficiaryService.get
-//	    Employee found = employeeService.getEmployeeByName(name);
-//	    
-//	  
-//	     assertThat(found.getName())
-//	      .isEqualTo(name);
-//	 }
 }

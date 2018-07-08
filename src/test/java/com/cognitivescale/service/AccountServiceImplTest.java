@@ -72,14 +72,6 @@ public class AccountServiceImplTest {
 		assertThat(responseUtils.getMessage()).isEqualTo("Account is created successfully.");
 	}
 
-	@Test
-	public void loginWithUsernameAndPassword() {
-		String username = "aneri.parikh";
-		String password = "aneri";
-		ResponseUtils responseUtils = accountService.validateUser(username, PasswordUtils.encrypt(password.getBytes()));
-		assertThat(responseUtils.getMessage()).isEqualTo("User is already registered.");
-	}
-
 	private AccountModel buildAccountModel() {
 		AccountModel accountModel = new AccountModel();
 		accountModel.setUsername("aneri.parikh");
