@@ -118,7 +118,7 @@ public class AccountServiceImpl implements AccountService {
 				response.setStatus(Constants.STATUS_SUCCESS);
 				response.setMessage("Account balance is retrieved successfully.");
 			} else {
-				response.setMessage("Account is not found.");
+				response.setMessage(Constants.ACCOUNT_NOT_REGISTERED);
 			}
 		} catch (Exception e) {
 			LOG.error(e.getMessage());
