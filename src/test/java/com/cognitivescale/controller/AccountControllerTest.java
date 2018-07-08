@@ -47,7 +47,7 @@ public class AccountControllerTest {
 		account.setAccountNumber(random.nextInt(900000000) + 100000000);
 		account.setBalance(accountModel.getBalance());
 		account.setCurrency(accountModel.getCurrency() != null ? accountModel.getCurrency() : "INR");
-		
+
 //		given(accountService.save(accountModel)).willReturn("");
 //		Object service;
 //		Object allEmployees;
@@ -56,7 +56,7 @@ public class AccountControllerTest {
 //		mockMvc.perform(post("/account/create_account").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
 //				.andExpect(jsonPath("$", hasSize(1))).andExpect(jsonPath("$[0].name", is(alex.getName())));
 	}
-	
+
 	private AccountModel buildAccountModel() {
 		AccountModel accountModel = new AccountModel();
 		accountModel.setUsername("aneri.parikh");
