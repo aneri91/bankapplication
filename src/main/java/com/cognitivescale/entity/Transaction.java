@@ -15,19 +15,16 @@ public class Transaction {
 	/** The id. */
 	@Id
 	private String id;
-	
+
 	/** The amount. */
 	private BigDecimal amount;
-	
+
 	/** The created date. */
 	private Date createdDate;
-	
-	/** The update date. */
-	private Date updateDate;
-	
+
 	/** The type. */
 	private String type;
-	
+
 	/** The account number. */
 	private Integer accountNumber;
 
@@ -83,24 +80,6 @@ public class Transaction {
 	 */
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
-	}
-
-	/**
-	 * Gets the update date.
-	 *
-	 * @return the update date
-	 */
-	public Date getUpdateDate() {
-		return updateDate;
-	}
-
-	/**
-	 * Sets the update date.
-	 *
-	 * @param updateDate the new update date
-	 */
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
 	}
 
 	/**
