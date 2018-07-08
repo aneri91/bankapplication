@@ -1,44 +1,40 @@
 package com.cognitivescale.model;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 /**
  * The Class BeneficiaryModel.
  */
 public class BeneficiaryModel {
-	
+
 	/** The currency. */
-	private String name, ifscCode, nickName, accountType, currency;
-	
+	private String beneficiaryName, ifscCode, nickName, accountType, currency;
+
 	/** The beneficiary account number. */
 	private Integer beneficiaryAccountNumber;
-	
+
 	/** The account number. */
 	private Integer accountNumber;
-	
+
 	/** The created date. */
 	private Date createdDate;
-	
-	/** The balance. */
-	private BigDecimal balance;
 
 	/**
-	 * Gets the name.
+	 * Gets the beneficiary name.
 	 *
-	 * @return the name
+	 * @return the beneficiary name
 	 */
-	public String getName() {
-		return name;
+	public String getBeneficiaryName() {
+		return beneficiaryName;
 	}
 
 	/**
-	 * Sets the name.
+	 * Sets the beneficiary name.
 	 *
-	 * @param name the new name
+	 * @param beneficiaryName the new beneficiary name
 	 */
-	public void setName(String name) {
-		this.name = name;
+	public void setBeneficiaryName(String beneficiaryName) {
+		this.beneficiaryName = beneficiaryName;
 	}
 
 	/**
@@ -165,24 +161,6 @@ public class BeneficiaryModel {
 	 */
 	public void setCurrency(String currency) {
 		this.currency = currency;
-	}
-
-	/**
-	 * Gets the balance.
-	 *
-	 * @return the balance
-	 */
-	public BigDecimal getBalance() {
-		return balance;
-	}
-
-	/**
-	 * Sets the balance.
-	 *
-	 * @param balance the new balance
-	 */
-	public void setBalance(BigDecimal balance) {
-		this.balance = balance;
 	}
 
 }

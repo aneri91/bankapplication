@@ -17,14 +17,6 @@ public interface AccountService {
 	ResponseUtils save(AccountModel userModel);
 
 	/**
-	 * Find by username.
-	 *
-	 * @param username the username
-	 * @return the response utils
-	 */
-	ResponseUtils findByUsername(String username);
-
-	/**
 	 * Validate user.
 	 *
 	 * @param username the username
@@ -44,7 +36,7 @@ public interface AccountService {
 	/**
 	 * Calculate interest by account number.
 	 *
-	 * @param date the date
+	 * @param date          the date
 	 * @param accountNumber the account number
 	 * @return the response utils
 	 */

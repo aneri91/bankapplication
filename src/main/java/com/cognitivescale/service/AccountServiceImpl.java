@@ -67,30 +67,6 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	/**
-	 * Finds by username.
-	 *
-	 * @param username
-	 * @return the account details
-	 */
-	@Override
-	public ResponseUtils findByUsername(String username) {
-		LOG.info("find by username");
-		ResponseUtils response = new ResponseUtils(Constants.STATUS_ERROR);
-		try {
-			Account account = accountDao.findByUsername(username);
-			if (account != null) {
-				response.setData(account);
-				response.setStatus(Constants.STATUS_SUCCESS);
-			}
-			response.setStatus(Constants.STATUS_ERROR);
-		} catch (Exception e) {
-			LOG.error(e.getMessage());
-			response.setMessage("Exception in finding username.");
-		}
-		return response;
-	}
-
-	/**
 	 * Validates user.
 	 *
 	 * @param username the username
@@ -142,7 +118,7 @@ public class AccountServiceImpl implements AccountService {
 				response.setStatus(Constants.STATUS_SUCCESS);
 				response.setMessage("Account balance is retrieved successfully.");
 			} else {
-				response.setMessage("Account is not found.");
+				response.setMessage(Constants.ACCOUNT_NOT_REGISTERED);
 			}
 		} catch (Exception e) {
 			LOG.error(e.getMessage());
