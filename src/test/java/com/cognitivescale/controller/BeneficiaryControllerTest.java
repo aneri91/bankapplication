@@ -18,16 +18,27 @@ import com.google.gson.Gson;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.response.Response;
 
+/**
+ * The Class BeneficiaryControllerTest.
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class BeneficiaryControllerTest {
+
+	/** The Constant LOG. */
 	private static final Logger LOG = LoggerFactory.getLogger(BeneficiaryControllerTest.class);
 
+	/**
+	 * Sets the up config.
+	 */
 	@Before
 	public void setUpConfig() {
 		AccountUtils.config();
 	}
 
+	/**
+	 * Beneficiary APIs.
+	 */
 	@Test
 	public void beneficiaryAPIs() {
 
@@ -48,6 +59,11 @@ public class BeneficiaryControllerTest {
 		deleteBeneficiary(Integer.parseInt(beneficiaryMap.get("beneficiaryAccountNumber")), accountNumber);
 	}
 
+	/**
+	 * Adds the beneficiary.
+	 *
+	 * @param beneficiaryMap the beneficiary map
+	 */
 	public static void addBeneficiary(Map<String, String> beneficiaryMap) {
 		Response response = RestAssured.given().contentType("application/json").accept("application/json")
 				.body(new Gson().toJson(beneficiaryMap)).when().post("/beneficiary/add");
@@ -56,6 +72,12 @@ public class BeneficiaryControllerTest {
 		LOG.info("/beneficiary/add response ::: " + response.asString());
 	}
 
+	/**
+	 * Delete beneficiary.
+	 *
+	 * @param beneficiaryAccountNumber the beneficiary account number
+	 * @param accountNumber            the account number
+	 */
 	private void deleteBeneficiary(Integer beneficiaryAccountNumber, Integer accountNumber) {
 		Response response = RestAssured.given().param("beneficiaryAccountNumber", beneficiaryAccountNumber)
 				.param("accountNumber", accountNumber).when().delete("/beneficiary/delete");

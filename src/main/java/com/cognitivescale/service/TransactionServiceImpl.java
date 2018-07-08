@@ -190,7 +190,7 @@ public class TransactionServiceImpl implements TransactionService {
 	 * @param millis                   the millis
 	 * @return the response utils
 	 */
-	@Scheduled(fixedDelay = 1000)
+	@Scheduled(cron = "0 15 10 15 * ?")
 	private ResponseUtils scheduleTransferFundAtGivenTime(Integer beneficiaryAccountNumber, Integer accountNumber,
 			BigDecimal amount, long millis) {
 		LOG.info("schedule transfer funds at give time");

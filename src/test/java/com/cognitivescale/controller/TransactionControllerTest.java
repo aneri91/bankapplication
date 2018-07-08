@@ -17,16 +17,27 @@ import com.cognitivescale.util.TestConstants;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.response.Response;
 
+/**
+ * The Class TransactionControllerTest.
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class TransactionControllerTest {
+
+	/** The Constant LOG. */
 	private static final Logger LOG = LoggerFactory.getLogger(BeneficiaryControllerTest.class);
 
+	/**
+	 * Sets the up config.
+	 */
 	@Before
 	public void setUpConfig() {
 		AccountUtils.config();
 	}
 
+	/**
+	 * Transaction APIs.
+	 */
 	@Test
 	public void transactionAPIs() {
 
@@ -51,6 +62,12 @@ public class TransactionControllerTest {
 
 	}
 
+	/**
+	 * Transfer funds.
+	 *
+	 * @param beneficiaryAccountNumber the beneficiary account number
+	 * @param accountNumber            the account number
+	 */
 	private void transferFunds(Integer beneficiaryAccountNumber, Integer accountNumber) {
 		Response response = RestAssured.given().param("beneficiaryAccountNumber", beneficiaryAccountNumber)
 				.param("accountNumber", accountNumber).param("amount", 9).when().get("/transaction/funds");
@@ -59,6 +76,11 @@ public class TransactionControllerTest {
 		LOG.info("/transaction/funds ::: " + response.asString());
 	}
 
+	/**
+	 * Transaction summary.
+	 *
+	 * @param accountNumber the account number
+	 */
 	private void transactionSummary(Integer accountNumber) {
 		Response response = RestAssured.given().param("accountNumber", accountNumber).param("toDate", "2019-05-06")
 				.param("fromDate", "2017-05-06").when().get("/transaction/statement");

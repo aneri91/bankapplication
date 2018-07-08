@@ -21,16 +21,27 @@ import com.google.gson.JsonParser;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.response.Response;
 
+/**
+ * The Class AccountControllerTest.
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class AccountControllerTest {
+
+	/** The Constant LOG. */
 	private static final Logger LOG = LoggerFactory.getLogger(AccountControllerTest.class);
 
+	/**
+	 * Sets the up config.
+	 */
 	@Before
 	public void setUpConfig() {
 		AccountUtils.config();
 	}
 
+	/**
+	 * Accounts APIs.
+	 */
 	@Test
 	public void accountsAPIs() {
 
@@ -49,6 +60,11 @@ public class AccountControllerTest {
 		calculateInterest(accountNumber);
 	}
 
+	/**
+	 * Creates the account.
+	 *
+	 * @param accountMap the account map
+	 */
 	public static void createAccount(Map<String, String> accountMap) {
 		Response response = RestAssured.given().contentType("application/json").accept("application/json")
 				.body(new Gson().toJson(accountMap)).when().post("/account/create_account");
@@ -57,6 +73,12 @@ public class AccountControllerTest {
 		LOG.info("/account/create_account response ::: " + response.asString());
 	}
 
+	/**
+	 * Login with username and password.
+	 *
+	 * @param accountMap the account map
+	 * @return the integer
+	 */
 	public static Integer loginWithUsernameAndPassword(Map<String, String> accountMap) {
 		Response loggedInUser = RestAssured.given().contentType("application/json").accept("application/json")
 				.body(new Gson().toJson(accountMap)).when().post("/account/login");
@@ -72,6 +94,12 @@ public class AccountControllerTest {
 		return accountNumber;
 	}
 
+	/**
+	 * Gets the balance info.
+	 *
+	 * @param accountNumber the account number
+	 * @return the balance info
+	 */
 	private void getBalanceInfo(Integer accountNumber) {
 		Response response = RestAssured.given().param("accountNumber", accountNumber).when().get("/account/balance");
 		String accountMessage = AccountUtils.buildResponse(response);
@@ -79,6 +107,11 @@ public class AccountControllerTest {
 		LOG.info("/account/balance response ::: " + response.asString());
 	}
 
+	/**
+	 * Calculate interest.
+	 *
+	 * @param accountNumber the account number
+	 */
 	private void calculateInterest(Integer accountNumber) {
 		Response response = RestAssured.given().param("accountNumber", accountNumber).param("date", "2050-08-30").when()
 				.get("/account/calculate_interest");
