@@ -34,11 +34,12 @@ Access the deployed web application at: http://localhost:5554/
 
 *   JRE/JDK 1.8 - [Install](https://docs.oracle.com/javase/8/docs/technotes/guides/install/install_overview.html)
 
+*   MongoDB 4.0.0 - [Install](https://docs.mongodb.com/tutorials/install-mongodb-on-windows/)
+
 ## Built With
 
 * [Maven](https://maven.apache.org/) - Dependency Management
 * [JDK 1.8](https://java.oracle.com/) - Java Developer Kit
-
 
 ## Assumptions
 
@@ -54,4 +55,4 @@ Access the deployed web application at: http://localhost:5554/
 
 ## Author
 
-* **Aneri PArikh** - *Initial work* - DEMO - [BankApplication]
+* **Aneri Parikh** - *Initial work* - DEMO - [BankApplication]
