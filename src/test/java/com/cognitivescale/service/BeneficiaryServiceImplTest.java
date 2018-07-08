@@ -58,7 +58,7 @@ public class BeneficiaryServiceImplTest {
 	}
 
 	/**
-	 * Test beneficiary AP is.
+	 * Test beneficiary APIs.
 	 */
 	@Test
 	public void testBeneficiaryAPIs() {
