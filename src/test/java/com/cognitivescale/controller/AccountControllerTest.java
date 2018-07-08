@@ -28,8 +28,7 @@ public class AccountControllerTest {
 	private static final Logger LOG = LoggerFactory.getLogger(AccountControllerTest.class);
 
 	@Before
-	public void addBeneficiaryDetails() {
-
+	public void setUpConfig() {
 		RestAssured.baseURI = "http://localhost:5554";
 		RestAssured.defaultParser = Parser.JSON;
 	}
@@ -38,33 +37,29 @@ public class AccountControllerTest {
 	public void accountsAPIs() {
 
 		Map<String, String> accountMap = AccountUtils.buildAccountModel();
-		
-		//creates account
-		addAccountDetails(accountMap);
-		
-		//login with username and password
+
+		// creates account
+		createAccount(accountMap);
+
+		// login with username and password
 		Integer accountNumber = loginWithUsernameAndPassword(accountMap);
-		
-		//get balance info by account number
+
+		// get balance info by account number
 		getBalanceInfo(accountNumber);
-		
-		//caculate interest by account number
+
+		// caculate interest by account number
 		calculateInterest(accountNumber);
 	}
 
-	private void addAccountDetails(Map<String, String> accountMap) {
-		Response newUserAccount = RestAssured.given().contentType("application/json").accept("application/json")
+	public static void createAccount(Map<String, String> accountMap) {
+		Response response = RestAssured.given().contentType("application/json").accept("application/json")
 				.body(new Gson().toJson(accountMap)).when().post("/account/create_account");
-		JsonObject accountObject = (JsonObject) new JsonParser().parse(newUserAccount.asString());
-		String accountMessage = accountObject.get("message").getAsString();
-		String accountStatus = accountObject.get("status").getAsString();
-		assertEquals(true, newUserAccount.getStatusCode() == 200);
-		assertThat(accountStatus).isEqualTo(TestConstants.STATUS_SUCCESS);
+		String accountMessage = AccountUtils.buildResponse(response);
 		assertThat(accountMessage).isEqualTo(TestConstants.ACCOUNT_CREATED);
-		LOG.info("/account/create_account response ::: " + newUserAccount.asString());
+		LOG.info("/account/create_account response ::: " + response.asString());
 	}
 
-	private Integer loginWithUsernameAndPassword(Map<String, String> accountMap) {
+	public static Integer loginWithUsernameAndPassword(Map<String, String> accountMap) {
 		Response loggedInUser = RestAssured.given().contentType("application/json").accept("application/json")
 				.body(new Gson().toJson(accountMap)).when().post("/account/login");
 		JsonObject loginObject = (JsonObject) new JsonParser().parse(loggedInUser.asString());
@@ -80,26 +75,17 @@ public class AccountControllerTest {
 	}
 
 	private void getBalanceInfo(Integer accountNumber) {
-		Response registeredAccount = RestAssured.given().param("accountNumber", accountNumber).when()
-				.get("/account/balance");
-		JsonObject accountObject = (JsonObject) new JsonParser().parse(registeredAccount.asString());
-		String accountMessage = accountObject.get("message").getAsString();
-		String accountStatus = accountObject.get("status").getAsString();
-		assertEquals(true, registeredAccount.getStatusCode() == 200);
-		assertThat(accountStatus).isEqualTo(TestConstants.STATUS_SUCCESS);
+		Response response = RestAssured.given().param("accountNumber", accountNumber).when().get("/account/balance");
+		String accountMessage = AccountUtils.buildResponse(response);
 		assertThat(accountMessage).isEqualTo(TestConstants.ACCOUNT_BALANCE);
-		LOG.info("/account/balance response ::: " + registeredAccount.asString());
+		LOG.info("/account/balance response ::: " + response.asString());
 	}
 
 	private void calculateInterest(Integer accountNumber) {
-		Response registeredAccount = RestAssured.given().param("accountNumber", accountNumber)
-				.param("date", "2050-08-30").when().get("/account/calculate_interest");
-		JsonObject accountObject = (JsonObject) new JsonParser().parse(registeredAccount.asString());
-		String accountMessage = accountObject.get("message").getAsString();
-		String accountStatus = accountObject.get("status").getAsString();
-		assertEquals(true, registeredAccount.getStatusCode() == 200);
-		assertThat(accountStatus).isEqualTo(TestConstants.STATUS_SUCCESS);
+		Response response = RestAssured.given().param("accountNumber", accountNumber).param("date", "2050-08-30").when()
+				.get("/account/calculate_interest");
+		String accountMessage = AccountUtils.buildResponse(response);
 		assertThat(accountMessage).isEqualTo(TestConstants.ACCOUNT_CALCULATED_BALANCE);
-		LOG.info("/account/calculate_interest response ::: " + registeredAccount.asString());
+		LOG.info("/account/calculate_interest response ::: " + response.asString());
 	}
 }

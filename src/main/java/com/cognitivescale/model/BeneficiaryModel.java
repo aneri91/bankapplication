@@ -1,6 +1,5 @@
 package com.cognitivescale.model;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -19,9 +18,6 @@ public class BeneficiaryModel {
 
 	/** The created date. */
 	private Date createdDate;
-
-	/** The balance. */
-	private BigDecimal balance;
 
 	/**
 	 * Gets the beneficiary name.
@@ -165,24 +161,6 @@ public class BeneficiaryModel {
 	 */
 	public void setCurrency(String currency) {
 		this.currency = currency;
-	}
-
-	/**
-	 * Gets the balance.
-	 *
-	 * @return the balance
-	 */
-	public BigDecimal getBalance() {
-		return balance;
-	}
-
-	/**
-	 * Sets the balance.
-	 *
-	 * @param balance the new balance
-	 */
-	public void setBalance(BigDecimal balance) {
-		this.balance = balance;
 	}
 
 }
