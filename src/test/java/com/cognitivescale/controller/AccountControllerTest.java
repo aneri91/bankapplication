@@ -11,10 +11,8 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.cognitivescale.service.AccountService;
 import com.cognitivescale.util.AccountUtils;
 import com.cognitivescale.util.TestConstants;
 import com.google.gson.Gson;
@@ -40,10 +38,17 @@ public class AccountControllerTest {
 	public void accountsAPIs() {
 
 		Map<String, String> accountMap = AccountUtils.buildAccountModel();
-
+		
+		//creates account
 		addAccountDetails(accountMap);
+		
+		//login with username and password
 		Integer accountNumber = loginWithUsernameAndPassword(accountMap);
+		
+		//get balance info by account number
 		getBalanceInfo(accountNumber);
+		
+		//caculate interest by account number
 		calculateInterest(accountNumber);
 	}
 
