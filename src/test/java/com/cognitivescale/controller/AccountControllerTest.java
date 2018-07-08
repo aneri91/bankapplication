@@ -1,24 +1,28 @@
 package com.cognitivescale.controller;
 
-import java.math.BigDecimal;
-import java.util.Date;
-import java.util.Random;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
 
-import com.cognitivescale.entity.Account;
 import com.cognitivescale.model.AccountModel;
 import com.cognitivescale.service.AccountService;
-import com.cognitivescale.util.PasswordUtils;
+import com.cognitivescale.util.AccountUtils;
+import com.cognitivescale.util.TestConstants;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.jayway.restassured.RestAssured;
+import com.jayway.restassured.parsing.Parser;
+import com.jayway.restassured.response.Response;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -26,46 +30,38 @@ import com.cognitivescale.util.PasswordUtils;
 public class AccountControllerTest {
 	private static final Logger LOG = LoggerFactory.getLogger(AccountControllerTest.class);
 
-	@Autowired
-	private MockMvc mockMvc;
 	@MockBean
 	private AccountService accountService;
 
+	@Before
+	public void setUpConfig() {
+		RestAssured.baseURI = "http://localhost:5554";
+		RestAssured.defaultParser = Parser.JSON;
+
+		AccountModel accountModel = AccountUtils.buildAccountModel();
+		Response newUserAccount = RestAssured.given().contentType("application/json").accept("application/json")
+				.body(new Gson().toJson(accountModel)).when().post("/account/create_account");
+		JsonObject jsonObject = (JsonObject) new JsonParser().parse(newUserAccount.asString());
+		String responseMessage = jsonObject.get("message").getAsString();
+		String responseStatus = jsonObject.get("status").getAsString();
+		assertEquals(true, newUserAccount.getStatusCode() == 200);
+		assertThat(responseStatus).isEqualTo(TestConstants.STATUS_SUCCESS);
+		assertThat(responseMessage).isEqualTo(TestConstants.ACCOUNT_CREATED);
+		LOG.info("/account/create_account response ::: " + newUserAccount.asString());
+	}
+
 	@Test
-	public void givenEmployees_whenGetEmployees_thenReturnJsonArray() throws Exception {
-		AccountModel accountModel = buildAccountModel();
-
-		Account account = new Account();
-		account.setUsername(accountModel.getUsername());
-		account.setPassword(PasswordUtils.encrypt(accountModel.getPassword().getBytes()));
-		account.setCountry(accountModel.getCountry() != null ? accountModel.getCountry() : "India");
-		account.setPhoneNumber(accountModel.getPhoneNumber());
-		account.setCreatedDate(new Date());
-		account.setAccountType(accountModel.getAccountType() != null ? accountModel.getAccountType() : "Saving");
-		account.setRole("CS_USER");
-		Random random = new Random();
-		account.setAccountNumber(random.nextInt(900000000) + 100000000);
-		account.setBalance(accountModel.getBalance());
-		account.setCurrency(accountModel.getCurrency() != null ? accountModel.getCurrency() : "INR");
-
-//		given(accountService.save(accountModel)).willReturn("");
-//		Object service;
-//		Object allEmployees;
-//		given("").willReturn("");
-//
-//		mockMvc.perform(post("/account/create_account").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-//				.andExpect(jsonPath("$", hasSize(1))).andExpect(jsonPath("$[0].name", is(alex.getName())));
+	public void loginWithUsernameAndPassword() {
+		AccountModel accountModel = AccountUtils.buildAccountModel();
+		Response loggedInUser = RestAssured.given().contentType("application/json").accept("application/json")
+				.body(new Gson().toJson(accountModel)).when().post("/account/login");
+		JsonObject jsonObject = (JsonObject) new JsonParser().parse(loggedInUser.asString());
+		String responseMessage = jsonObject.get("message").getAsString();
+		String responseStatus = jsonObject.get("status").getAsString();
+		assertEquals(true, loggedInUser.getStatusCode() == 200);
+		assertThat(responseStatus).isEqualTo(TestConstants.STATUS_SUCCESS);
+		assertThat(responseMessage).isEqualTo(TestConstants.ACCOUNT_IS_REGISTERED);
+		LOG.info("/account/login response ::: " + loggedInUser.asString());
 	}
 
-	private AccountModel buildAccountModel() {
-		AccountModel accountModel = new AccountModel();
-		accountModel.setUsername("aneri.parikh");
-		accountModel.setPassword("aneri");
-		accountModel.setConfirmPassword("aneri");
-		accountModel.setCountry("India");
-		accountModel.setPhoneNumber(9725575554L);
-		accountModel.setAccountType("Current");
-		accountModel.setBalance(BigDecimal.TEN);
-		return accountModel;
-	}
 }
