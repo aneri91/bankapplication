@@ -49,7 +49,7 @@ Access the deployed web application at: http://localhost:5554/
 - Created Application using spring boot and spring data with mongodb darabase
 - Added postman collection to test all APIs in CognitiveScale.postman_collection.json file
 - Added swagger file to test all APIs also by executing http://localhost:5554/swagger-ui.html
-- API documents [link](https://documenter.getpostman.com/view/630373/cognitivescale/6fZy3UH)
+- API documents [link](https://documenter.getpostman.com/collection/view/664192-7fc30f50-9160-0837-77ea-95c1d1b1c775)
 - Added test cases to test account, beneficiary and transaction APIs using Rest Assured 
 
 ## Author
