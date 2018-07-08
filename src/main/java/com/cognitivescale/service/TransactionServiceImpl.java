@@ -174,6 +174,8 @@ public class TransactionServiceImpl implements TransactionService {
 			Date givenDate = dateFormat.parse(datetime);
 			long millis = givenDate.getTime() - currentDate.getTime();
 			scheduleTransferFundAtGivenTime(beneficiaryAccountNumber, accountNumber, amount, millis);
+			response.setStatus(Constants.STATUS_SUCCESS);
+			response.setMessage("Transferring fund is scheduled at given time.");
 		} catch (Exception e) {
 			LOG.error(e.getMessage());
 			response.setMessage("Exception in scheduling fund transfer.");
