@@ -14,7 +14,7 @@ Inside Eclipse
 File -> Import -> Maven -> Existing Maven project
 ```
 
-- Create database "cognitivescaledb"
+- Create database "cognitivescaledb" in MongoDB
 - Change configuration for db in src/main/resources/application.properties
 
 ```
@@ -43,16 +43,15 @@ Access the deployed web application at: http://localhost:5554/
 
 ## Assumptions
 
-- Account number is created randomly from create account
+- Account number is created randomly from create account API
 
 ## Documentation
 
-- Created Application using spring boot and spring data with mongodb darabase
-- Added postman collection to test all APIs in CognitiveScale.postman_collection.json file
+- Created Application using spring boot and spring data with MongoDB database
 - Added swagger file to test all APIs also by executing http://localhost:5554/swagger-ui.html
 - API documents [link](https://documenter.getpostman.com/collection/view/664192-7fc30f50-9160-0837-77ea-95c1d1b1c775)
-- Added test cases to test account, beneficiary and transaction APIs using Rest Assured 
+- Added test cases to test account, beneficiary and transaction APIs using Rest Assured library
 
 ## Author
 
-* **Aneri Parikh** - *Initial work* - DEMO - [BankApplication]
+* **Aneri Parikh** - parikhaneri3@gmail.com

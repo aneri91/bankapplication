@@ -54,14 +54,14 @@ public class BeneficiaryServiceImpl implements BeneficiaryService {
 				if (ObjectUtils.isEmpty(beneficiary)) {
 					beneficiary = buildBeneficiary(beneficiaryModel);
 					beneficiaryDao.save(beneficiary);
-					List<Integer> addUpdateBeneficiaries = null;
-					if (account.getBeneficiariesList() == null) {
+					List<Beneficiary> addUpdateBeneficiaries = null;
+					if (account.getBeneficiaries() == null) {
 						addUpdateBeneficiaries = new ArrayList<>();
 					} else {
-						addUpdateBeneficiaries = account.getBeneficiariesList();
+						addUpdateBeneficiaries = account.getBeneficiaries();
 					}
-					addUpdateBeneficiaries.add(beneficiary.getBeneficiaryAccountNumber());
-					account.setBeneficiariesList(addUpdateBeneficiaries);
+					addUpdateBeneficiaries.add(beneficiary);
+					account.setBeneficiaries(addUpdateBeneficiaries);
 					accountDao.save(account);
 					response.setData(beneficiary);
 					response.setStatus(Constants.STATUS_SUCCESS);
@@ -102,13 +102,6 @@ public class BeneficiaryServiceImpl implements BeneficiaryService {
 				if (!ObjectUtils.isEmpty(beneficiary)) {
 					if (beneficiary.getAccountNumber().equals(account.getAccountNumber())) {
 						beneficiaryDao.delete(beneficiary);
-						if (account.getBeneficiariesList() != null) {
-//						List<Integer> beneficiaries = account.getBeneficiariesList();
-//						for (Integer beneficiaryAccNumber : beneficiaries) {
-//							
-//							account.setBeneficiariesList(beneficiaries);
-//						}
-						}
 						response.setStatus(Constants.STATUS_SUCCESS);
 						response.setMessage("Beneficiary is deleted successfully.");
 					} else {

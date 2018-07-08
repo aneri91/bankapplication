@@ -23,25 +23,41 @@ import com.cognitivescale.model.AccountModel;
 import com.cognitivescale.util.PasswordUtils;
 import com.cognitivescale.util.ResponseUtils;
 
+/**
+ * The Class AccountServiceImplTest.
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class AccountServiceImplTest {
 
+	/**
+	 * The Class AccountServiceImplTestContextConfiguration.
+	 */
 	@TestConfiguration
 	static class AccountServiceImplTestContextConfiguration {
 
+		/**
+		 * Account service.
+		 *
+		 * @return the account service
+		 */
 		@Bean
 		public AccountService accountService() {
 			return new AccountServiceImpl();
 		}
 	}
 
+	/** The account service. */
 	@Autowired
 	private AccountService accountService;
 
+	/** The account dao. */
 	@MockBean
 	private AccountDao accountDao;
 
+	/**
+	 * Sets the up account details.
+	 */
 	@Before
 	public void setUpAccountDetails() {
 
@@ -65,6 +81,9 @@ public class AccountServiceImplTest {
 				.thenReturn(account);
 	}
 
+	/**
+	 * Creates the account details if username not exist.
+	 */
 	@Test
 	public void createAccountDetailsIfUsernameNotExist() {
 		AccountModel accountModel = buildAccountModel();
@@ -72,6 +91,11 @@ public class AccountServiceImplTest {
 		assertThat(responseUtils.getMessage()).isEqualTo("Account is created successfully.");
 	}
 
+	/**
+	 * Builds the account model.
+	 *
+	 * @return the account model
+	 */
 	private AccountModel buildAccountModel() {
 		AccountModel accountModel = new AccountModel();
 		accountModel.setUsername("aneri.parikh");

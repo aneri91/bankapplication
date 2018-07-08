@@ -15,19 +15,19 @@ public class Beneficiary {
 	/** The id. */
 	@Id
 	private String id;
-	
+
 	/** The currency. */
 	private String beneficiaryName, ifscCode, nickName, accountType, currency;
-	
+
 	/** The beneficiary account number. */
 	private Integer beneficiaryAccountNumber;
-	
+
 	/** The account number. */
 	private Integer accountNumber;
-	
+
 	/** The balance. */
 	private BigDecimal balance;
-	
+
 	/** The created date. */
 	private Date createdDate;
 

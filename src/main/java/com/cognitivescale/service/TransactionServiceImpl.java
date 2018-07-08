@@ -123,16 +123,6 @@ public class TransactionServiceImpl implements TransactionService {
 						transactionDao.save(transactionMaster);
 						transactionDao.save(beneficiaryTransactionMaster);
 
-						List<Transaction> addUpdateTransactions = null;
-						if (account.getTransactions() == null) {
-							addUpdateTransactions = new ArrayList<>();
-						} else {
-							addUpdateTransactions = account.getTransactions();
-						}
-						addUpdateTransactions.add(beneficiaryTransactionMaster);
-						account.setTransactions(addUpdateTransactions);
-						accountDao.save(account);
-
 						List<Transaction> list = new ArrayList<>();
 						list.add(transactionMaster);
 						list.add(beneficiaryTransactionMaster);
@@ -174,6 +164,8 @@ public class TransactionServiceImpl implements TransactionService {
 			Date givenDate = dateFormat.parse(datetime);
 			long millis = givenDate.getTime() - currentDate.getTime();
 			scheduleTransferFundAtGivenTime(beneficiaryAccountNumber, accountNumber, amount, millis);
+			response.setStatus(Constants.STATUS_SUCCESS);
+			response.setMessage("Transferring fund is scheduled at given time.");
 		} catch (Exception e) {
 			LOG.error(e.getMessage());
 			response.setMessage("Exception in scheduling fund transfer.");
@@ -190,7 +182,7 @@ public class TransactionServiceImpl implements TransactionService {
 	 * @param millis                   the millis
 	 * @return the response utils
 	 */
-	@Scheduled(fixedDelay = 1000)
+	@Scheduled(cron = "0 15 10 15 * ?")
 	private ResponseUtils scheduleTransferFundAtGivenTime(Integer beneficiaryAccountNumber, Integer accountNumber,
 			BigDecimal amount, long millis) {
 		LOG.info("schedule transfer funds at give time");

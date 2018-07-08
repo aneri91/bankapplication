@@ -16,45 +16,39 @@ public class Account {
 	/** The id. */
 	@Id
 	private String id;
-	
+
 	/** The username. */
 	private String username;
-	
+
 	/** The password. */
 	private String password;
-	
+
 	/** The country. */
 	private String country;
-	
+
 	/** The phone number. */
 	private Long phoneNumber;
-	
+
 	/** The created date. */
 	private Date createdDate;
-	
+
 	/** The account type. */
 	private String accountType;
-	
+
 	/** The role. */
 	private String role;
-	
+
 	/** The account number. */
 	private Integer accountNumber;
-	
+
 	/** The balance. */
 	private BigDecimal balance;
-	
+
 	/** The currency. */
 	private String currency;
-	
+
 	/** The beneficiaries. */
 	private List<Beneficiary> beneficiaries;
-	
-	/** The beneficiaries list. */
-	private List<Integer> beneficiariesList;
-	
-	/** The transactions. */
-	private List<Transaction> transactions;
 
 	/**
 	 * Gets the id.
@@ -270,42 +264,6 @@ public class Account {
 	 */
 	public void setBeneficiaries(List<Beneficiary> beneficiaries) {
 		this.beneficiaries = beneficiaries;
-	}
-
-	/**
-	 * Gets the beneficiaries list.
-	 *
-	 * @return the beneficiaries list
-	 */
-	public List<Integer> getBeneficiariesList() {
-		return beneficiariesList;
-	}
-
-	/**
-	 * Sets the beneficiaries list.
-	 *
-	 * @param beneficiariesList the new beneficiaries list
-	 */
-	public void setBeneficiariesList(List<Integer> beneficiariesList) {
-		this.beneficiariesList = beneficiariesList;
-	}
-
-	/**
-	 * Gets the transactions.
-	 *
-	 * @return the transactions
-	 */
-	public List<Transaction> getTransactions() {
-		return transactions;
-	}
-
-	/**
-	 * Sets the transactions.
-	 *
-	 * @param transactions the new transactions
-	 */
-	public void setTransactions(List<Transaction> transactions) {
-		this.transactions = transactions;
 	}
 
 }

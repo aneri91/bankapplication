@@ -16,8 +16,16 @@ import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.parsing.Parser;
 import com.jayway.restassured.response.Response;
 
+/**
+ * The Class AccountUtils.
+ */
 public class AccountUtils {
 
+	/**
+	 * Builds the account model.
+	 *
+	 * @return the map
+	 */
 	public static Map<String, String> buildAccountModel() {
 		Map<String, String> accountMap = new HashMap<String, String>();
 		String username = RandomStringUtils.randomAlphabetic(10);
@@ -31,6 +39,12 @@ public class AccountUtils {
 		return accountMap;
 	}
 
+	/**
+	 * Builds the beneficiary model.
+	 *
+	 * @param accountNumber the account number
+	 * @return the map
+	 */
 	public static Map<String, String> buildBeneficiaryModel(Integer accountNumber) {
 		Map<String, String> beneficiaryMap = new HashMap<String, String>();
 		String beneficiaryName = RandomStringUtils.randomAlphabetic(10);
@@ -45,6 +59,12 @@ public class AccountUtils {
 		return beneficiaryMap;
 	}
 
+	/**
+	 * Builds the response.
+	 *
+	 * @param response the response
+	 * @return the string
+	 */
 	public static String buildResponse(Response response) {
 		JsonObject jsonObject = (JsonObject) new JsonParser().parse(response.asString());
 		String status = jsonObject.get("status").getAsString();
@@ -54,6 +74,9 @@ public class AccountUtils {
 		return message;
 	}
 
+	/**
+	 * Config.
+	 */
 	public static void config() {
 		RestAssured.baseURI = "http://localhost:5554";
 		RestAssured.defaultParser = Parser.JSON;
